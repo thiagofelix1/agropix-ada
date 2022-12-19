@@ -1,14 +1,14 @@
 version: '3.9'
 services:
   db:
-    container_name: "postgres_itau"
+    container_name: "postgres_ada"
     image: postgres
     ports:
       - '5432:5432'
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: itauunibanco
-      POSTGRES_DB: banco_itau_db
+      POSTGRES_PASSWORD: bancoada
+      POSTGRES_DB: banco_ada_db
     volumes:
       - /db/
     networks:
@@ -24,7 +24,7 @@ services:
     networks:
       - backend
   web_itau:
-    container_name: "itau"
+    container_name: "ada"
     build: .
     ports:
       - "5000:5000"

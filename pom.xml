@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.agropix</groupId>
-	<artifactId>itau</artifactId>
+	<artifactId>ada</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>itau</name>
-	<description>Aplicação que irá simular o itau</description>
+	<name>ada</name>
+	<description>Aplicação que irá simular o banco Ada</description>
 	<properties>
 		<java.version>11</java.version>
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>

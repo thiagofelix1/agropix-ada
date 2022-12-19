@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ItauApplication {
+public class AdaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ItauApplication.class, args);
+		SpringApplication.run(AdaApplication.class, args);
 	}
 
 }
