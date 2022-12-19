@@ -6,13 +6,14 @@ import com.agropix.ada.model.Conta;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 @Component
 public interface ContaMapper {
 
-    // ToDo: Create Conta Mapper
-
     ContaResponse toResponse(Conta conta);
     Conta toModel(ContaRequest contaRequest);
+    List<ContaResponse> toResponseList(List<Conta> listaContas);
 
 }

@@ -1,12 +1,12 @@
 package com.agropix.ada.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
@@ -14,13 +14,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TipoConta {
+public class TransferenciaPix {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column
-    @NotNull
-    private String tipoConta;
+    @ManyToOne
+    @JoinColumn(name = "chave_origem_id")
+    private ChavePix chaveOrigem;
 
+    @Column
+    private String chaveDestino;
+
+    @Column
+    private Double valor;
+
+    @Column
+    private StatusTransferencia statusTransferencia;
 }
