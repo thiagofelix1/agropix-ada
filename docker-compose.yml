@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  db:
+    container_name: "postgres_ada"
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: bancoada
+      POSTGRES_DB: banco_ada_db
+    volumes:
+      - /db/
+    networks:
+      - backend
+
+  web_ada:
+    container_name: "ada"
+    build: .
+    ports:
+      - "5002:5000"
+    depends_on:
+      - db
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: agropix

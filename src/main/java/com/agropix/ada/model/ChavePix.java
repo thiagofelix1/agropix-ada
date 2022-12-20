@@ -14,26 +14,23 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cliente {
+public class ChavePix {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotNull
-    private String nome;
-
-    @Column(nullable = false, length = 11)
-    @NotNull
-    private String cpf;
+    private String chavePix;
 
     @Column(nullable = false)
     @NotNull
-    private String email;
+    private String tipo;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "conta_id")
     @NotNull
-    private String telefone;
+    private Conta conta;
 
 }

@@ -1,6 +1,7 @@
 package com.agropix.ada.service;
 
 import com.agropix.ada.dto.ClienteRequest;
+import com.agropix.ada.exceptions.ItemNotExistsException;
 import com.agropix.ada.mapper.ClienteMapper;
 import com.agropix.ada.model.Cliente;
 import com.agropix.ada.repository.ClienteRepository;
@@ -14,34 +15,35 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ClienteService {
 
-    private ClienteRepository clienteRepository;
-    private ClienteMapper clienteMapper;
+    private final ClienteRepository repository;
+    private final ClienteMapper mapper;
 
     public Cliente save(ClienteRequest clienteRequest) {
-        Cliente cliente = clienteMapper.toModel(clienteRequest);
-        clienteRepository.save(cliente);
+        Cliente cliente = mapper.toModel(clienteRequest);
+        repository.save(cliente);
         return cliente;
+    }
+
+    public Cliente findById(UUID contaId) {
+        return repository.findById(contaId)
+                .orElseThrow(() -> new ItemNotExistsException("Cliente não encontrado!"));
+    }
+
+    public Cliente update(UUID clienteId, ClienteRequest clienteRequest) {
+        Cliente cliente = findById(clienteId);
+        cliente = mapper.toModel(clienteRequest);
+        cliente.setId(clienteId);
+        repository.save(cliente);
+        return cliente;
+    }
+
+    public void delete(UUID clienteId) {
+        Cliente cliente = findById(clienteId);
+        repository.delete(cliente);
     }
 
     public List<Cliente> findAll() {
-        return clienteRepository.findAll();
-    }
-
-    public Cliente findById(UUID id) {
-        return clienteRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("invalid id"));
-    }
-
-    public Cliente update(UUID uuid, ClienteRequest clienteRequest) {
-        Cliente cliente = findById(uuid);
-        cliente = clienteMapper.toModel(clienteRequest);
-        clienteRepository.save(cliente);
-        return cliente;
-    }
-
-    public void delete(UUID id) {
-        Cliente cliente = findById(id);
-        clienteRepository.delete(cliente);
+        return repository.findAll();
     }
 
 }
