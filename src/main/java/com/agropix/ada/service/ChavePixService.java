@@ -28,6 +28,8 @@ import java.util.UUID;
 public class ChavePixService {
     @Value("${banco.name}")
     private String nomeBanco;
+    @Value("${banco.codigo}")
+    private String codigoBanco;
     private final ChavePixRepository repository;
     private final ChavePixMapper mapper;
     private final ContaService contaService;
@@ -82,7 +84,7 @@ public class ChavePixService {
 
         ObjectNode banco = objectMapper.createObjectNode();
         banco.put("nome", nomeBanco);
-        banco.put("codigo", "341");
+        banco.put("codigo", codigoBanco);
 
         ObjectNode titular = objectMapper.createObjectNode();
         titular.put("nome", chavePix.getConta().getCliente().getNome());
